@@ -1,62 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Trailing Zeros in Factorial</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f3f4f6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #83a4d4, #b6fbff);
+  color: #333;
+  text-align: center;
+  padding: 50px;
+  margin: 0;
+}
 
-    h1 {
-      color: #111827;
-      margin-bottom: 20px;
-    }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #222;
+}
 
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      color: white;
-      background-color: #2563eb;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-    button:hover {
-      background-color: #1d4ed8;
-    }
-  </style>
-</head>
-<body>
-  <h1>Trailing Zeros in Factorial</h1>
-  <button onclick="handleClick()">Check Trailing Zeros</button>
+button:hover {
+  background-color: #005fa3;
+}
 
-  <script>
-    function trailingZeros(n) {
-      let count = 0;
-      for (let i = 5; n / i >= 1; i *= 5) {
-        count += Math.floor(n / i);
-      }
-      return count;
-    }
-
-    function handleClick() {
-      const input = parseInt(prompt("Enter a non-negative integer:"), 10);
-      if (!isNaN(input) && input >= 0) {
-        alert("Number of trailing zeros in " + input + "! is: " + trailingZeros(input));
-      } else {
-        alert("Please enter a valid non-negative integer.");
-      }
-    }
-  </script>
-</body>
-</html>
+#weatherData {
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 15px 20px;
+  display: inline-block;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

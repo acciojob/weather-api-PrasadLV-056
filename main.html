@@ -2,30 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Trailing Zeros in Factorial</title>
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #weatherData {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h1>Trailing Zeros in Factorial</h1>
-  <button onclick="handleClick()">Check Trailing Zeros</button>
+
+  <h1>Simple Weather App</h1>
+  <button onclick="getWeather()">Get Current Weather</button>
+  <div id="weatherData"></div>
 
   <script>
-    function trailingZeros(n) {
-      let count = 0;
-      for (let i = 5; n / i >= 1; i *= 5) {
-        count += Math.floor(n / i);
-      }
-      return count;
-    }
+    function getWeather() {
+      const apiKey = 'YOUR_API_KEY_HERE'; // Replace with your OpenWeatherMap API key
+      const city = 'London';
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-    function handleClick() {
-      const input = parseInt(prompt("Enter a non-negative integer:"), 10);
-
-      if (!isNaN(input) && input >= 0) {
-        alert("Number of trailing zeros in " + input + "! is: " + trailingZeros(input));
-      } else {
-        alert("Please enter a valid non-negative integer.");
-      }
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Weather data not found');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const condition = data.weather[0].main;
+          document.getElementById('weatherData').textContent =
+            `Current weather in ${city}: ${condition}`;
+        })
+        .catch(error => {
+          document.getElementById('weatherData').textContent =
+            `Error: ${error.message}`;
+        });
     }
   </script>
+
 </body>
 </html>

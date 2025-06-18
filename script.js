@@ -1,16 +1,22 @@
-function trailingZeros(n) {
-  let count = 0;
-  for (let i = 5; n / i >= 1; i *= 5) {
-    count += Math.floor(n / i);
-  }
-  return count;
-}
+function getWeather() {
+  const apiKey = 'YOUR_API_KEY_HERE'; // 🔁 Replace with your OpenWeatherMap API key
+  const city = 'London';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-function handleClick() {
-  const input = parseInt(prompt("Enter a non-negative integer:"), 10);
-  if (!isNaN(input) && input >= 0) {
-    alert("Number of trailing zeros in " + input + "! is: " + trailingZeros(input));
-  } else {
-    alert("Please enter a valid non-negative integer.");
-  }
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Weather data not found');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const condition = data.weather[0].main;
+      document.getElementById('weatherData').textContent =
+        `Current weather in ${city}: ${condition}`;
+    })
+    .catch(error => {
+      document.getElementById('weatherData').textContent =
+        `Error: ${error.message}`;
+    });
 }
