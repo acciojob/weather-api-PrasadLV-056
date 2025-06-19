@@ -1,22 +1,23 @@
-function getWeather() {
-  const apiKey = 'YOUR_API_KEY_HERE'; // 🔁 Replace with your OpenWeatherMap API key
-  const city = 'London';
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+<script>
+  async function getWeather() {
+    const apiKey = 'YOUR_API_KEY'; // 🔑 Replace this with your actual OpenWeatherMap API key
+    const city = 'London';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-  fetch(url)
-    .then(response => {
+    try {
+      const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Weather data not found');
+        throw new Error('Network response was not ok');
       }
-      return response.json();
-    })
-    .then(data => {
-      const condition = data.weather[0].main;
-      document.getElementById('weatherData').textContent =
-        `Current weather in ${city}: ${condition}`;
-    })
-    .catch(error => {
-      document.getElementById('weatherData').textContent =
-        `Error: ${error.message}`;
-    });
-}
+      const data = await response.json();
+      const weatherDescription = data.weather[0].main;
+
+      document.getElementById("weatherData").innerText =
+        `Current weather in ${city}: ${weatherDescription}`;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      document.getElementById("weatherData").innerText =
+        "Failed to retrieve weather data.";
+    }
+  }
+</script>

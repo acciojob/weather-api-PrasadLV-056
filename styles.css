@@ -1,41 +1,35 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #83a4d4, #b6fbff);
-  color: #333;
-  text-align: center;
-  padding: 50px;
-  margin: 0;
-}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    text-align: center;
+    padding-top: 100px;
+    margin: 0;
+  }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #222;
-}
+  h2 {
+    font-size: 32px;
+    color: #00796b;
+  }
 
-button {
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  button {
+    padding: 12px 24px;
+    font-size: 18px;
+    color: white;
+    background-color: #007acc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
 
-button:hover {
-  background-color: #005fa3;
-}
+  button:hover {
+    background-color: #005fa3;
+  }
 
-#weatherData {
-  margin-top: 25px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #222;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 15px 20px;
-  display: inline-block;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  #weatherData {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #333;
+  }
+</style>
