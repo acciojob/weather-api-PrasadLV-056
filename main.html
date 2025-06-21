@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #getWeatherBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #weatherData {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
+  <h2>Simple Weather App</h2>
+  <button id="getWeatherBtn">Get Current Weather</button>
+  <div id="weatherData"></div>
 
-  <h2>Weather Application</h2>
-
-  <!-- Button to get weather -->
-  <button onclick="getWeather()">Get Current Weather</button>
-
-  <!-- Div to show the weather result -->
-  <div id="weatherData">Weather info will appear here...</div>
-
-  <!-- JavaScript will be added here -->
   <script>
-    async function getWeather() {
-      const apiKey = 'YOUR_API_KEY'; // Replace with your actual OpenWeatherMap API key
-      const city = 'London';
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    document.getElementById("getWeatherBtn").addEventListener("click", function () {
+      const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+      const city = "London";
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const weatherDescription = data.weather[0].main;
-
-        document.getElementById("weatherData").innerText =
-          `Current weather in ${city}: ${weatherDescription}`;
-      } catch (error) {
-        document.getElementById("weatherData").innerText =
-          "Failed to retrieve weather data.";
-        console.error("Error:", error);
-      }
-    }
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          if (data.weather && data.weather.length > 0) {
+            const weather = data.weather[0].main;
+            document.getElementById("weatherData").innerText =
+              `Current weather in ${city}: ${weather}`;
+          } else {
+            document.getElementById("weatherData").innerText =
+              "Weather data not available.";
+          }
+        })
+        .catch(error => {
+          document.getElementById("weatherData").innerText =
+            "Error fetching weather data: " + error.message;
+        });
+    });
   </script>
-
 </body>
 </html>

@@ -1,23 +1,27 @@
-<script>
-  async function getWeather() {
-    const apiKey = 'YOUR_API_KEY'; // 🔑 Replace this with your actual OpenWeatherMap API key
-    const city = 'London';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+document.getElementById("getWeatherBtn").addEventListener("click", function () {
+  const apiKey = "YOUR_API_KEY"; // 🔑 Replace with your OpenWeatherMap API key
+  const city = "London";
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-    try {
-      const response = await fetch(url);
+  fetch(apiUrl)
+    .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-      const data = await response.json();
-      const weatherDescription = data.weather[0].main;
-
+      return response.json();
+    })
+    .then(data => {
+      if (data.weather && data.weather.length > 0) {
+        const weather = data.weather[0].main;
+        document.getElementById("weatherData").innerText =
+          `Current weather in ${city}: ${weather}`;
+      } else {
+        document.getElementById("weatherData").innerText =
+          "Weather data not available.";
+      }
+    })
+    .catch(error => {
       document.getElementById("weatherData").innerText =
-        `Current weather in ${city}: ${weatherDescription}`;
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-      document.getElementById("weatherData").innerText =
-        "Failed to retrieve weather data.";
-    }
-  }
-</script>
+        "Error fetching weather data: " + error.message;
+    });
+});
